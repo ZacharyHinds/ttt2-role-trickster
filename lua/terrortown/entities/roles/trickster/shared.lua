@@ -9,8 +9,8 @@ function ROLE:PreInitialize()
 	self.abbr = "trk"
 	self.visibleForTeam = {TEAM_TRAITOR}
 	self.surviveBonus = 0
-	self.scoreKillsMultiplier = 1
-	self.scoreTeamKillsMultiplier = -8
+	self.scoreKillsMultiplier = 0
+	self.scoreTeamKillsMultiplier = 0
 	self.preventWin = true
 
 	self.defaultTeam = TEAM_JESTER
@@ -25,6 +25,18 @@ function ROLE:PreInitialize()
 end
 
 if SERVER then
+	function ROLE:Initialize()
+		for _, role in ipairs(roles.GetList()) do
+			if role.baserole == ROLE_TRAITOR or role.index == ROLE_TRAITOR then
+				if not self.networkRoles then
+					self.networkRoles = {role}
+				else
+					table.insert(self.networkRoles, role)
+				end
+			end
+		end
+	end
+
 	hook.Add("TTT2ModifySelectableRoles", "TTT2ModifySelectableRolesrkNeedsJes", function (selectableRoles)
 	  if not selectableRoles[TRICKSTER] then return end
 	  if not JESTER or not selectableRoles[JESTER] or GetConVar("ttt2_jes_winstate"):GetInt() ~= 1 then

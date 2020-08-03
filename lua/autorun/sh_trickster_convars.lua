@@ -17,7 +17,7 @@ hook.Add("TTTUlxDynamicRCVars", "ttt2_ulx_dynamic_trickster_convars", function(t
       "1 - Trickster becomes jester if there isn't one",
       "2 - Someone else becomes jester if there isn't one"
     },
-    numStart = 0
+    numStart = 0,
     desc = "ttt2_trk_jester_mode (def. 0)"
   })
 end)
