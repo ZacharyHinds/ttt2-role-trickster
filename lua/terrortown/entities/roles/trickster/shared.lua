@@ -92,15 +92,21 @@ if SERVER then
 			end
 		end
 
+		local targetply = nil
+
 		if #base_innos > 0 then
-			local targetply = base_innos[math.random(#base_innos)]
+			targetply = base_innos[math.random(#base_innos)]
 		elseif #all_innos > 0 then
-			local targetply = all_innos[math.random(#all_innos)]
+			targetply = all_innos[math.random(#all_innos)]
 		elseif #neutrals > 0 then
-			local targetply = neutrals[math.random(#neutrals)]
+			targetply = neutrals[math.random(#neutrals)]
 		else
 			return
 		end
+
+		if not targetply then return end
+
+		targetply:SetRole(ROLE_JESTER, TEAM_JESTER)
 	end
 
 	function SetTrickJester()
